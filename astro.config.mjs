@@ -11,10 +11,5 @@ export default defineConfig({
   },
   vite: {
     plugins: [tailwindcss()],
-    server: {
-      hmr: {
-        clientPort: 443,
-      },
-    },
   }
 });
