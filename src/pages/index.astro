@@ -1,16 +1,191 @@
 ---
-
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Button from '../components/Button.astro';
+import Card from '../components/Card.astro';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout title="ADHD-Friendly Design System">
+  <Header />
+  
+  <main class="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
+    <!-- Hero Section -->
+    <section class="container mx-auto px-5 md:px-6 lg:px-8 py-12 md:py-16 lg:py-20">
+      <div class="max-w-4xl mx-auto text-center">
+        <h1 class="text-[28px] md:text-[32px] lg:text-[36px] font-bold text-slate-900 mb-6">
+          ⚡ ADHD-Friendly Design System
+        </h1>
+        <p class="text-[18px] md:text-[20px] lg:text-[22px] text-slate-700 mb-8 max-w-3xl mx-auto leading-relaxed">
+          A professional design system built with accessibility and cognitive load reduction in mind. 
+          Perfect for creating interfaces that work for everyone.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <Button variant="primary" size="lg">
+            Get Started
+          </Button>
+          <Button variant="outline" size="lg">
+            View Guidelines
+          </Button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="container mx-auto px-5 md:px-6 lg:px-8 py-12 md:py-16">
+      <h2 class="text-[24px] md:text-[28px] lg:text-[32px] font-bold text-center mb-12 text-slate-900">
+        Core Principles
+      </h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 max-w-7xl mx-auto">
+        <Card title="📱 Mobile-First">
+          <p class="text-[18px] md:text-[20px] lg:text-[22px] text-slate-700 leading-relaxed">
+            Designed for touch interfaces with minimum 56px tap targets and generous spacing.
+          </p>
+        </Card>
+
+        <Card title="👁️ High Contrast">
+          <p class="text-[18px] md:text-[20px] lg:text-[22px] text-slate-700 leading-relaxed">
+            7:1 contrast ratios ensure text is always readable, reducing eye strain and cognitive load.
+          </p>
+        </Card>
+
+        <Card title="📏 Readable Typography">
+          <p class="text-[18px] md:text-[20px] lg:text-[22px] text-slate-700 leading-relaxed">
+            Minimum 18px body text with 1.6 line height. Never exceeding 60 characters per line.
+          </p>
+        </Card>
+
+        <Card title="🎯 Clear Hierarchy">
+          <p class="text-[18px] md:text-[20px] lg:text-[22px] text-slate-700 leading-relaxed">
+            Maximum 3 font sizes per page to maintain focus and reduce decision fatigue.
+          </p>
+        </Card>
+
+        <Card title="⚡ Fast Response">
+          <p class="text-[18px] md:text-[20px] lg:text-[22px] text-slate-700 leading-relaxed">
+            Smooth transitions and immediate feedback for all interactive elements.
+          </p>
+        </Card>
+
+        <Card title="♿ Accessible">
+          <p class="text-[18px] md:text-[20px] lg:text-[22px] text-slate-700 leading-relaxed">
+            Built following WCAG 2.1 AAA standards with keyboard navigation and screen reader support.
+          </p>
+        </Card>
+      </div>
+    </section>
+
+    <!-- Typography Scale Demo -->
+    <section class="container mx-auto px-5 md:px-6 lg:px-8 py-12 md:py-16">
+      <div class="max-w-4xl mx-auto">
+        <Card title="Typography Scale">
+          <div class="space-y-6">
+            <div>
+              <p class="text-slate-500 text-[16px] mb-2 font-semibold">Heading 1</p>
+              <h1 class="text-[28px] md:text-[32px] lg:text-[36px] font-bold text-slate-900">
+                The quick brown fox jumps
+              </h1>
+            </div>
+            
+            <div>
+              <p class="text-slate-500 text-[16px] mb-2 font-semibold">Heading 2</p>
+              <h2 class="text-[24px] md:text-[28px] lg:text-[32px] font-bold text-slate-900">
+                The quick brown fox jumps
+              </h2>
+            </div>
+            
+            <div>
+              <p class="text-slate-500 text-[16px] mb-2 font-semibold">Body Text</p>
+              <p class="text-[18px] md:text-[20px] lg:text-[22px] text-slate-700 leading-relaxed">
+                The quick brown fox jumps over the lazy dog. This is how body text looks 
+                at different breakpoints with optimal line height for readability.
+              </p>
+            </div>
+          </div>
+        </Card>
+      </div>
+    </section>
+
+    <!-- Button Variants Demo -->
+    <section class="container mx-auto px-5 md:px-6 lg:px-8 py-12 md:py-16">
+      <div class="max-w-4xl mx-auto">
+        <Card title="Button Components">
+          <div class="space-y-8">
+            <div>
+              <p class="text-slate-500 text-[16px] mb-4 font-semibold">Primary Buttons</p>
+              <div class="flex flex-wrap gap-4">
+                <Button variant="primary" size="sm">Small (44px)</Button>
+                <Button variant="primary" size="md">Medium (56px)</Button>
+                <Button variant="primary" size="lg">Large (64px)</Button>
+              </div>
+            </div>
+            
+            <div>
+              <p class="text-slate-500 text-[16px] mb-4 font-semibold">Secondary Buttons</p>
+              <div class="flex flex-wrap gap-4">
+                <Button variant="secondary" size="sm">Small</Button>
+                <Button variant="secondary" size="md">Medium</Button>
+                <Button variant="secondary" size="lg">Large</Button>
+              </div>
+            </div>
+            
+            <div>
+              <p class="text-slate-500 text-[16px] mb-4 font-semibold">Outline Buttons</p>
+              <div class="flex flex-wrap gap-4">
+                <Button variant="outline" size="sm">Small</Button>
+                <Button variant="outline" size="md">Medium</Button>
+                <Button variant="outline" size="lg">Large</Button>
+              </div>
+            </div>
+          </div>
+        </Card>
+      </div>
+    </section>
+
+    <!-- Quick Reference -->
+    <section class="container mx-auto px-5 md:px-6 lg:px-8 py-12 md:py-16 mb-12">
+      <div class="max-w-4xl mx-auto">
+        <Card title="📋 Quick Reference">
+          <div class="space-y-4">
+            <div class="bg-slate-50 p-6 rounded-lg">
+              <h3 class="font-bold text-[20px] md:text-[22px] text-slate-900 mb-3">Mobile (320-767px)</h3>
+              <ul class="space-y-2 text-[18px] md:text-[20px] text-slate-700">
+                <li>• Body text: 18px minimum</li>
+                <li>• Buttons: 56×56px minimum</li>
+                <li>• Max line length: 45 characters</li>
+                <li>• Screen margins: 20px</li>
+              </ul>
+            </div>
+            
+            <div class="bg-slate-50 p-6 rounded-lg">
+              <h3 class="font-bold text-[20px] md:text-[22px] text-slate-900 mb-3">Tablet (768-1023px)</h3>
+              <ul class="space-y-2 text-[18px] md:text-[20px] text-slate-700">
+                <li>• Body text: 20px</li>
+                <li>• 2-column grid layouts</li>
+                <li>• Content max-width: 600px</li>
+              </ul>
+            </div>
+            
+            <div class="bg-slate-50 p-6 rounded-lg">
+              <h3 class="font-bold text-[20px] md:text-[22px] text-slate-900 mb-3">Desktop (1024px+)</h3>
+              <ul class="space-y-2 text-[18px] md:text-[20px] text-slate-700">
+                <li>• Body text: 22px</li>
+                <li>• 3-column grid layouts</li>
+                <li>• Content max-width: 800px</li>
+              </ul>
+            </div>
+          </div>
+        </Card>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-slate-900 text-white py-12">
+    <div class="container mx-auto px-5 md:px-6 lg:px-8 text-center">
+      <p class="text-[18px] md:text-[20px] lg:text-[22px]">
+        Built with ⚡ and accessibility in mind
+      </p>
+    </div>
+  </footer>
+</BaseLayout>
