@@ -1,0 +1,130 @@
+<div class="h-full w-full flex flex-col bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100">
+  <header class="flex-shrink-0 bg-white dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800">
+    <div class="p-4 text-center">
+      <h1 class="text-2xl font-bold">Clinician's Toolkit to Survive An Appeal</h1>
+      <p class="text-slate-500 dark:text-slate-400 mt-1">A strategic guide for navigating Vyvanse (lisdexamfetamine) coverage denials.</p>
+    </div>
+    <nav class="flex items-center justify-center border-t border-slate-200 dark:border-slate-800 px-4">
+      <ul class="flex overflow-x-auto -mb-px">
+        @for (tab of tabs; track tab.id) {
+          <li class="flex-shrink-0">
+            <button (click)="selectTab(tab.id)"
+                    class="inline-flex items-center gap-2 px-4 py-3 border-b-2 text-sm font-medium transition-colors"
+                    [class.border-blue-500]="activeTab() === tab.id"
+                    [class.text-blue-600]="activeTab() === tab.id"
+                    [class.dark:text-blue-400]="activeTab() === tab.id"
+                    [class.border-transparent]="activeTab() !== tab.id"
+                    [class.text-slate-500]="activeTab() !== tab.id"
+                    [class.hover:text-slate-700]="activeTab() !== tab.id"
+                    [class.dark:text-slate-400]="activeTab() !== tab.id"
+                    [class.dark:hover:text-slate-200]="activeTab() !== tab.id"
+                    [class.hover:border-slate-300]="activeTab() !== tab.id"
+                    [class.dark:hover:border-slate-600]="activeTab() !== tab.id">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5" [innerHTML]="tab.icon"></svg>
+              {{ tab.title }}
+            </button>
+          </li>
+        }
+      </ul>
+    </nav>
+  </header>
+
+  <main class="flex-1 overflow-y-auto p-6 sm:p-8">
+    <div class="max-w-4xl mx-auto">
+      @switch (activeTab()) {
+        @case ('framework') {
+          <div class="space-y-6">
+            <div class="bg-white dark:bg-slate-950 p-6 rounded-lg border border-slate-200 dark:border-slate-800">
+              <h2 class="text-xl font-semibold mb-3">The Regulatory Framework</h2>
+              <p class="text-slate-600 dark:text-slate-400">The Affordable Care Act (ACA) standardized the external review process, guaranteeing consumers the right to appeal an insurer's final denial to an Independent Review Organization (IRO). The IRO's decision is legally binding.</p>
+            </div>
+             <div class="bg-white dark:bg-slate-950 p-6 rounded-lg border border-slate-200 dark:border-slate-800">
+              <h2 class="text-xl font-semibold mb-3">Defining "Medical Necessity"</h2>
+              <p class="text-slate-600 dark:text-slate-400 mb-4">For psychopharmacological denials, IROs determine if a treatment is medically necessary based on:</p>
+              <ul class="list-disc pl-5 space-y-2 text-slate-600 dark:text-slate-400">
+                <li>Consistency with prevailing medical standards.</li>
+                <li>Clinical appropriateness for the diagnosed condition.</li>
+                <li>Support from credible scientific evidence (e.g., peer-reviewed literature).</li>
+              </ul>
+            </div>
+            <div class="bg-white dark:bg-slate-950 p-6 rounded-lg border border-slate-200 dark:border-slate-800">
+              <h2 class="text-xl font-semibold mb-3">The Compendia Standard: A Powerful Tool</h2>
+              <p class="text-slate-600 dark:text-slate-400">Under federal law (influencing Medicare Part D and commercial plans), coverage for a drug is mandated if it's prescribed for a "medically-accepted indication." This includes not only FDA-approved uses but also off-label uses supported by citation in specific, Congressionally-recognized compendia like AHFS-DI or DRUGDEX. This provides a powerful, legally enforceable floor for coverage in appeals.</p>
+            </div>
+          </div>
+        }
+        @case ('arguments') {
+          <div class="space-y-6">
+            <h2 class="text-2xl font-bold text-center mb-4">High-Stakes Clinical Arguments</h2>
+            <div class="bg-white dark:bg-slate-950 p-6 rounded-lg border border-slate-200 dark:border-slate-800">
+              <h3 class="text-xl font-semibold mb-3">Justifying Off-Label Dosing (>70 mg/day)</h3>
+              <p class="text-slate-600 dark:text-slate-400 mb-4">Denials often occur for doses exceeding the 70 mg/day FDA maximum. Successful appeals (e.g., in NY) have been won for doses of 80-90 mg/day by demonstrating a clear, long-term therapeutic benefit and individualized titration. However, there's a risk threshold:</p>
+              <ul class="list-disc pl-5 space-y-2 text-slate-600 dark:text-slate-400">
+                <li><strong>Acceptable Rationale:</strong> Documented failure of all lower doses and alternatives, with proven individual benefit over an extended period (e.g., years).</li>
+                <li><strong>High-Risk Rationale:</strong> Prescribing extremely high doses (e.g., 140+ mg/day) without meticulous justification risks being flagged as a deviation from the standard of care by professional medical boards (e.g., California), giving payers a strong defense for denial.</li>
+              </ul>
+            </div>
+            <div class="bg-white dark:bg-slate-950 p-6 rounded-lg border border-slate-200 dark:border-slate-800">
+              <h3 class="text-xl font-semibold mb-3">The Prodrug Advantage: Bypassing Step Therapy</h3>
+              <p class="text-slate-600 dark:text-slate-400">A key strategy to bypass step therapy (requiring trial-and-failure of cheaper generics) is to establish the fundamental pharmacological non-equivalence between Vyvanse and alternatives.</p>
+              <p class="text-slate-600 dark:text-slate-400 mt-3">Argue that the unique prodrug mechanism—which ensures a slow, consistent rise in serum d-amphetamine levels and reduces abuse potential—is clinically necessary for the patient due to a history of variable response, GI sensitivity, or misuse concerns. This frames the alternatives as clinically inappropriate, justifying the formulary exception.</p>
+            </div>
+          </div>
+        }
+        @case ('comorbidity') {
+          <div class="space-y-6">
+             <div class="bg-white dark:bg-slate-950 p-6 rounded-lg border border-slate-200 dark:border-slate-800">
+              <h2 class="text-xl font-semibold mb-3">The "Indication Pivot" with Binge Eating Disorder (BED)</h2>
+              <p class="text-slate-600 dark:text-slate-400">This is the most powerful nationwide appeal strategy. Lisdexamfetamine is the <strong>only</strong> medication with FDA approval for treating moderate to severe BED in adults.</p>
+              <p class="text-slate-600 dark:text-slate-400 mt-3">If an insurer denies Vyvanse for ADHD, the appeal can immediately pivot to the on-label BED indication (provided the patient meets diagnostic criteria). This converts the dispute from a non-preferred ADHD treatment to a denial of the only approved medication for BED, substantially raising the payer's burden of proof for the denial.</p>
+            </div>
+             <div class="bg-white dark:bg-slate-950 p-6 rounded-lg border border-slate-200 dark:border-slate-800">
+              <h2 class="text-xl font-semibold mb-3">Managing Anxiety and Affective Disorders</h2>
+              <p class="text-slate-600 dark:text-slate-400">Appeals for patients with co-morbid anxiety (e.g., GAD) can succeed with meticulous documentation. The key is to provide detailed medical records demonstrating a long-term history of stabilization on the medication. This proves the treating physician's clinical judgment that the stimulant is essential for controlling ADHD symptoms without adverse effects, preventing functional decline or "decompensation."</p>
+            </div>
+          </div>
+        }
+        @case ('precedents') {
+           <div class="space-y-6">
+            <h2 class="text-2xl font-bold text-center mb-4">Non-New York Administrative & Judicial Precedents</h2>
+             <div class="bg-white dark:bg-slate-950 p-6 rounded-lg border border-slate-200 dark:border-slate-800">
+              <h3 class="text-xl font-semibold mb-3">Federal Judicial Precedent (11th Circuit - Florida)</h3>
+              <p class="text-slate-600 dark:text-slate-400">A binding ruling confirmed that Medicare Part D <strong>must</strong> provide coverage for a beneficiary’s off-label use of a medication if that use is supported by a Congressionally recognized compendium (AHFS-DI or DRUGDEX). This creates a potent, nationwide legal defense for off-label dosing of Vyvanse.</p>
+            </div>
+             <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-white dark:bg-slate-950 p-6 rounded-lg border border-slate-200 dark:border-slate-800">
+                    <h3 class="text-xl font-semibold mb-3">State Scrutiny (Texas)</h3>
+                    <p class="text-slate-600 dark:text-slate-400">A major Medicaid fraud settlement involving Vyvanse suggests heightened regulatory focus. Payers in Texas are likely to enforce exceptionally strict utilization management. Appeals require rigorous, exhaustive documentation to overcome initial denials.</p>
+                </div>
+                 <div class="bg-white dark:bg-slate-950 p-6 rounded-lg border border-slate-200 dark:border-slate-800">
+                    <h3 class="text-xl font-semibold mb-3">Quantity Limitations (Massachusetts)</h3>
+                    <p class="text-slate-600 dark:text-slate-400">State agencies like MassHealth enforce specific, detailed regulations on stimulant dispensing (e.g., 60-day supplies). Success in these states often hinges on precise documentation justifying why the requested quantity or duration meets codified state exceptions for clinical appropriateness.</p>
+                </div>
+             </div>
+           </div>
+        }
+        @case ('recommendations') {
+          <div class="space-y-6">
+             <div class="bg-blue-50 dark:bg-blue-900/20 p-6 rounded-lg border border-blue-200 dark:border-blue-800">
+              <h2 class="text-xl font-semibold mb-3 text-blue-800 dark:text-blue-300">Strategic Recommendations for Appeal Success</h2>
+               <ol class="list-decimal pl-5 space-y-4 text-slate-700 dark:text-slate-300">
+                <li>
+                  <strong class="font-semibold">Prioritize the Indication Pivot:</strong> Always screen denial cases for co-morbid BED. If present, structure the appeal primarily around the necessity of treating the FDA-approved indication.
+                </li>
+                <li>
+                  <strong class="font-semibold">Document Uniqueness Rigorously:</strong> When facing step therapy denials, explicitly articulate why the prodrug mechanism provides a clinically superior outcome (e.g., history of variable efficacy, GI sensitivity, diversion concerns), making generic alternatives non-equivalent and clinically inappropriate.
+                </li>
+                <li>
+                  <strong class="font-semibold">Leverage Compendia for Dosing:</strong> For any off-label dosing request, conduct a pre-appeal check to confirm support in the AHFS-DI or DRUGDEX compendia. If support exists, explicitly cite the federal compendia rule in the appeal letter.
+                </li>
+                <li>
+                  <strong class="font-semibold">Acknowledge and Address State Scrutiny:</strong> In environments with strict scrutiny (e.g., Texas) or explicit quantity limits (e.g., Massachusetts), meticulously adhere to documentation standards, preemptively addressing limitations and providing exhaustive evidence of prior failures and clinical necessity.
+                </li>
+              </ol>
+            </div>
+          </div>
+        }
+      }
+    </div>
+  </main>
+</div>

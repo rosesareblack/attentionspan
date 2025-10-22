@@ -1,0 +1,112 @@
+<div class="h-full w-full flex flex-col items-center justify-center p-4 sm:p-6 bg-slate-50 dark:bg-slate-900 transition-colors duration-300">
+  <div class="w-full max-w-2xl bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-lg shadow-lg p-6 sm:p-8 transition-all duration-500">
+    @if (!quizCompleted()) {
+      <div class="animate-fade-in">
+        <div class="mb-6">
+          <p class="text-sm font-semibold text-blue-600 dark:text-blue-400 mb-1">Question {{ currentQuestionIndex() + 1 }} of {{ questions().length }}</p>
+          <div class="w-full bg-slate-200 dark:bg-slate-800 rounded-full h-2">
+            <div class="bg-blue-600 h-2 rounded-full transition-all duration-300" [style.width.%]="progress()"></div>
+          </div>
+        </div>
+        <h2 class="text-xl sm:text-2xl font-semibold text-slate-800 dark:text-slate-100 mb-6 min-h-24">{{ currentQuestion().text }}</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          @for (option of currentQuestion().options; track option) {
+            <button (click)="selectOption(option)"
+                    class="w-full p-4 rounded-md text-left transition-all duration-200 border transform active:scale-95"
+                    [class.bg-blue-600]="currentQuestion().selection() === option"
+                    [class.text-white]="currentQuestion().selection() === option"
+                    [class.border-blue-600]="currentQuestion().selection() === option"
+                    [class.shadow-lg]="currentQuestion().selection() === option"
+                    [class.hover:bg-slate-100]="currentQuestion().selection() !== option"
+                    [class.dark:hover:bg-slate-800]="currentQuestion().selection() !== option"
+                    [class.bg-white]="currentQuestion().selection() !== option"
+                    [class.dark:bg-slate-900]="currentQuestion().selection() !== option"
+                    [class.border-slate-300]="currentQuestion().selection() !== option"
+                    [class.dark:border-slate-700]="currentQuestion().selection() !== option"
+            >
+              {{ option }}
+            </button>
+          }
+        </div>
+      </div>
+    } @else {
+      <div class="text-center animate-fade-in">
+        <h2 class="text-2xl sm:text-3xl font-bold text-slate-800 dark:text-slate-100 mb-2">Quiz Completed!</h2>
+        <p class="text-slate-600 dark:text-slate-400 mb-6">Here is a summary of your results:</p>
+        
+        <div class="mb-6 p-6 rounded-lg"
+             [class.bg-green-50]="resultCategory() === 'Low'"
+             [class.dark:bg-green-900/20]="resultCategory() === 'Low'"
+             [class.bg-yellow-50]="resultCategory() === 'Moderate'"
+             [class.dark:bg-yellow-900/20]="resultCategory() === 'Moderate'"
+             [class.bg-red-50]="resultCategory() === 'High'"
+             [class.dark:bg-red-900/20]="resultCategory() === 'High'"
+        >
+          <div class="relative w-32 h-32 mx-auto mb-4">
+              <svg class="w-full h-full" viewBox="0 0 36 36">
+                  <path class="stroke-current text-slate-200 dark:text-slate-700"
+                        d="M18 2.0845
+                          a 15.9155 15.9155 0 0 1 0 31.831
+                          a 15.9155 15.9155 0 0 1 0 -31.831"
+                        fill="none"
+                        stroke-width="3"></path>
+                  <path class="stroke-current"
+                        [class.text-green-500]="resultCategory() === 'Low'"
+                        [class.text-yellow-500]="resultCategory() === 'Moderate'"
+                        [class.text-red-500]="resultCategory() === 'High'"
+                        stroke-dasharray="{{ (score() / 40) * 100 }}, 100"
+                        d="M18 2.0845
+                          a 15.9155 15.9155 0 0 1 0 31.831
+                          a 15.9155 15.9155 0 0 1 0 -31.831"
+                        fill="none"
+                        stroke-width="3"
+                        stroke-linecap="round"></path>
+              </svg>
+              <div class="absolute inset-0 flex flex-col items-center justify-center">
+                  <span class="text-3xl font-bold text-slate-800 dark:text-slate-100">{{ score() }}</span>
+                  <span class="text-sm text-slate-500 dark:text-slate-400">/ 40</span>
+              </div>
+          </div>
+          <h3 class="text-lg font-semibold mt-1"
+             [class.text-green-800]="resultCategory() === 'Low'"
+             [class.dark:text-green-300]="resultCategory() === 'Low'"
+             [class.text-yellow-800]="resultCategory() === 'Moderate'"
+             [class.dark:text-yellow-300]="resultCategory() === 'Moderate'"
+             [class.text-red-800]="resultCategory() === 'High'"
+             [class.dark:text-red-300]="resultCategory() === 'High'"
+          >{{ resultDetails().title }}</h3>
+          <p class="text-sm text-slate-600 dark:text-slate-400 mt-2">{{ resultDetails().description }}</p>
+        </div>
+
+        <div class="my-6">
+            <h4 class="text-md font-semibold text-slate-700 dark:text-slate-300 mb-3">Next Steps</h4>
+            <div class="flex flex-col sm:flex-row gap-3 justify-center">
+                <button (click)="onNavigate('research')" class="flex-1 px-4 py-2 text-sm font-semibold rounded-md bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+                    Browse Research Library
+                </button>
+                <button (click)="onNavigate('chat')" class="flex-1 px-4 py-2 text-sm font-semibold rounded-md bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+                    Ask the AI Assistant
+                </button>
+            </div>
+        </div>
+
+        <p class="text-xs text-slate-500 dark:text-slate-500 mb-6">
+          <strong>Disclaimer:</strong> This is not a medical diagnosis. This tool is for informational purposes only. Please consult with a qualified healthcare professional for an accurate assessment.
+        </p>
+
+        <button (click)="resetQuiz()" class="px-6 py-3 rounded-md bg-blue-600 text-white font-semibold hover:bg-blue-700 transition-colors">
+          Take Quiz Again
+        </button>
+      </div>
+    }
+  </div>
+</div>
+<style>
+  @keyframes fade-in {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .animate-fade-in {
+    animation: fade-in 0.5s ease-out forwards;
+  }
+</style>
