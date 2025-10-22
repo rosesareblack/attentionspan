@@ -7,12 +7,17 @@ import tailwindcss from '@tailwindcss/vite';
 export default defineConfig({
   server: {
     port: 5000,
-    host: '0.0.0.0',
+    host: true,
   },
   vite: {
     plugins: [tailwindcss()],
     server: {
-      allowedHosts: true
+      strictPort: false,
+      host: '0.0.0.0',
+      hmr: {
+        protocol: 'wss',
+        clientPort: 443
+      }
     }
   }
 });
